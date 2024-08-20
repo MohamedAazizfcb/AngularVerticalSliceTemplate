@@ -1,20 +1,15 @@
-import { Injectable } from "@angular/core";
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { EnvironmentService } from "../services/environment.service";
+import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { EnvironmentService } from '../services/environment.service'; // Update path as needed
 
-@Injectable()
-export class AppIdInterceptor implements HttpInterceptor {
-  constructor(private envService: EnvironmentService) {}
+export const appIdInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+  const envService = inject(EnvironmentService);
+  const appId = envService.getAppId();
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const appId = this.envService.getAppId();
+  // Clone the request and add the APPID header
+  const clonedReq = req.clone({
+    headers: req.headers.set('APPID', appId)
+  });
 
-    // Clone the request and add the APPID header
-    const clonedReq = req.clone({
-      headers: req.headers.set('APPID', appId)
-    });
-
-    return next.handle(clonedReq);
-  }
-}
+  return next(clonedReq);
+};

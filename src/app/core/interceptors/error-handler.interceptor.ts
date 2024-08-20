@@ -1,29 +1,23 @@
-import { Injectable } from "@angular/core";
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { LoggerService } from "../services/logger.service";
-import { ToastrService } from "../services/toastr.service";
+import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
+import { LoggerService } from '../services/logger.service';
+import { ToastrService } from '../services/toastr.service';
 
-@Injectable()
-export class ErrorHandlingInterceptor implements HttpInterceptor {
-  constructor(
-    private logService: LoggerService,
-    private toastrService: ToastrService
-  ) {}
+export const errorHandlerInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+  const logService = inject(LoggerService);
+  const toastrService = inject(ToastrService);
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
-      catchError((error: HttpErrorResponse) => {
-        // Log the error
-        this.logService.error(`Error(${ error.status }) is intercepted with the message: ${ error.message }`);
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      // Log the error
+      logService.error(`Error of status=(${ error.status }) is intercepted with the message: ${ error.message }`);
 
-        // Show user-friendly message
-        this.toastrService.showError(error.message);
+      // Show user-friendly message
+      toastrService.showError(error.message);
 
-        // Return an observable with the error to use if needed
-        return throwError(() => error);
-      })
-    );
-  }
-}
+      // Return an observable with the error to use if needed
+      return throwError(() => error);
+    })
+  );
+};
