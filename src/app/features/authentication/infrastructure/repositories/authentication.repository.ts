@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EnvironmentService } from '../../../../shared/utilities/environment.service';
+import { EnvironmentService } from '../../../../core/services/environment.service';
+import { LoggerService } from '../../../../core/services/logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,10 @@ export class AuthenticationRepository {
 
   constructor(
     private http: HttpClient,
-    private envService: EnvironmentService
+    private envService: EnvironmentService,
   ) {}
 
   login(username: string, password: string): Observable<any> {
-    console.log(this.envService.getApiUrl());
     return this.http.post<any>(`${this.envService.getApiUrl()}/login`, { username, password });
   }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ForgetPasswordPresenter } from './forget-password.presenter';
 import { CommonModule } from '@angular/common';
+import { LoggerService } from '../../../../core/services/logger.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -16,18 +17,21 @@ export class ForgetPasswordComponent {
 
   constructor(
     private fb: FormBuilder, 
-    private presenter: ForgetPasswordPresenter
-   ) {
-    this.forgetPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
-  }
+    private presenter: ForgetPasswordPresenter,
+    private logService: LoggerService,
+   ) 
+    {
+      this.forgetPasswordForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]]
+      });
+    }
 
   onSubmit() {
     if (this.forgetPasswordForm.valid) {
+      this.logService.info(`user ${this.forgetPasswordForm.value.email} is trying to update the password`);
       this.presenter.forgetPassword(this.forgetPasswordForm.value.email)
         .subscribe(response => {
-          // Handle successful password reset request
+          this.logService.info(`user ${this.forgetPasswordForm.value.email} updated the password successfully!`);
         });
     }
   }

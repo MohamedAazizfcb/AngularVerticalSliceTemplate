@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { LoginService } from './services/login/login.service';
 import { SignupService } from './services/signup/signup.service';
 import { ForgetPasswordService } from './services/forget-password/forget-password.service';
+import { LoggerService } from '../../../core/services/logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthenticationFacade {
   constructor(
     private loginService: LoginService,
     private signUpService: SignupService,
-    private forgetPasswordService: ForgetPasswordService
+    private forgetPasswordService: ForgetPasswordService,
   ) {}
 
   login(username: string, password: string): Observable<any> {
