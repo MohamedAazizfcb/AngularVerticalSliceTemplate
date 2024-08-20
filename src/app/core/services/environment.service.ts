@@ -5,6 +5,11 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class EnvironmentService {
+
+  getAppId(): string {
+    return environment.appId;
+  }
+
   isProduction(): boolean {
     return environment.production;
   }
