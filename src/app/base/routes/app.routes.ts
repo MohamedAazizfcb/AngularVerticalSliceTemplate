@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { authenticationRoutes } from '../../features/authentication/authentication-routing';
+import { authenticationRoutingModel } from '../../features/authentication/application/routing/authentication-routing';
 
 export const routes: Routes = [
     {  
-        path: 'auth', 
-        children: authenticationRoutes 
+        path: authenticationRoutingModel.parentRoute, 
+        children: authenticationRoutingModel.featureRoutes 
     },
-    // { 
-    //     path: '', 
-    //     redirectTo: '/auth/login', 
-    //     pathMatch: 'full'
-    // }
+    { 
+        path: '', 
+        redirectTo: `/${authenticationRoutingModel.parentRoute}/${authenticationRoutingModel.featureRoutesWithLabels.login.route}`, 
+        pathMatch: 'full'
+    }
 ];
