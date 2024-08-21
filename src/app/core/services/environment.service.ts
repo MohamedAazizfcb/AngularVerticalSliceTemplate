@@ -6,23 +6,23 @@ import { environment } from '../../../environments/environment';
 })
 export class EnvironmentService {
 
-  getAppId(): string {
+  getAppId = (): string => {
     return environment.appId;
   }
 
-  isProduction(): boolean {
+  isProduction = (): boolean => {
     return environment.production;
   }
 
-  getApiUrl(): string {
+  getApiUrl = (): string => {
     return environment.apiUrl;
   }
 
-  canPerformLogging(): boolean {
+  canPerformLogging = (): boolean => {
     return environment.logging;
   }
 
-  getFeatureFlag(): boolean {
+  getFeatureFlag = (): boolean => {
     return environment.featureFlag;
   }
 }

@@ -7,21 +7,21 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class ToastrService {
   constructor(private snackBar: MatSnackBar) {}
 
-  showSuccess(message: string, action: string = 'Close', duration: number = 5000): void {
+  showSuccess = (message: string, action: string = 'Close', duration: number = 5000): void => {
     this.snackBar.open(message, action, {
       duration: duration,
       panelClass: ['success-snackbar'], // Global SCSS
     });
   }
 
-  showError(message: string, action: string = 'Close', duration: number = 5000): void {
+  showError = (message: string, action: string = 'Close', duration: number = 5000): void => {
     this.snackBar.open(message, action, {
       duration: duration,
       panelClass: ['error-snackbar'], // Global SCSS
     });
   }
 
-  showInfo(message: string, action: string = 'Close', duration: number = 5000): void {
+  showInfo = (message: string, action: string = 'Close', duration: number = 5000): void => {
     this.snackBar.open(message, action, {
       duration: duration,
       panelClass: ['info-snackbar'], // Global SCSS

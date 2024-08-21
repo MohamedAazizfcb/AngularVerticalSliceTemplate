@@ -1,8 +1,11 @@
 import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
+import { TokenService } from '../services/token.service';
+import { inject } from '@angular/core';
 
 export const AuthenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
-    const accessToken = "AA";
+    const tokenService = inject(TokenService);
+    const accessToken = tokenService.getAccessToken()?? '';
 
     // Clone the request to add the Access Token Bearer header.
     const authReq = req.clone({
@@ -10,6 +13,7 @@ export const AuthenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<un
         Authorization: `Bearer ${accessToken}`
         }
     });
+
     return next(authReq).pipe(
         catchError(error => {
             // Handle authentication error here (redirect to login)

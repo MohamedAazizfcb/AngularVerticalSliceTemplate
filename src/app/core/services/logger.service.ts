@@ -13,7 +13,7 @@ export class LoggerService {
   {}
 
   // General log method
-  private log(level: LogLevel, message: string, ...optionalParams: any[]) {
+  private log= (level: LogLevel, message: string, ...optionalParams: any[]) => {
     if(!this.envService.canPerformLogging())
     {
         return;
@@ -27,23 +27,23 @@ export class LoggerService {
     this.sendToServer(level, message, optionalParams);
   }
 
-  info(message: string, ...optionalParams: any[]) {
+  info = (message: string, ...optionalParams: any[]) => {
     this.log(LogLevel.INFO, message, ...optionalParams);
   }
 
-  warn(message: string, ...optionalParams: any[]) {
+  warn = (message: string, ...optionalParams: any[]) => {
     this.log(LogLevel.WARN, message, ...optionalParams);
   }
 
-  error(message: string, ...optionalParams: any[]) {
+  error = (message: string, ...optionalParams: any[]) => {
     this.log(LogLevel.ERROR, message, ...optionalParams);
   }
 
-  debug(message: string, ...optionalParams: any[]) {
+  debug = (message: string, ...optionalParams: any[]) => {
     this.log(LogLevel.DEBUG, message, ...optionalParams);
   }
 
-  private sendToServer(level: LogLevel, message: string, optionalParams: any[]) {
+  private sendToServer = (level: LogLevel, message: string, optionalParams: any[]) => {
     if (this.envService.isProduction()) {
       // Post Request
     }
