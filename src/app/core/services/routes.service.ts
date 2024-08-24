@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouteInfoModel } from '../models/route-info.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,16 @@ export class RoutesService {
         private router: Router
     )
     {}
-    
-    getNavigationRoute = (): string[] => {
-        return [""];
+
+    getRoutePath = (routeInfo: RouteInfoModel) : string => {
+        return `/${routeInfo.parentRoute}/${routeInfo.routingObject.path}`
     }
 
-    navigateToRouteBy = (): void => {
-        this.router.navigate([]);
+    getNavigationRoute = (routeInfo: RouteInfoModel): string[] => {
+        return [`/${routeInfo.parentRoute}`, routeInfo.routingObject.path?? ''];
+    }
+
+    navigateToRoute = (routeInfo: RouteInfoModel): void => {
+        this.router.navigate(this.getNavigationRoute(routeInfo));
     }
 }

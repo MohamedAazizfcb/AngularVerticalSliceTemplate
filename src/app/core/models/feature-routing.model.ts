@@ -1,9 +1,8 @@
-import { Route } from "@angular/router";
 import { RouteInfoModel } from "./route-info.model";
 
-// Define the interface using the constant object keys
-export interface FeatureRoutingModel<T_FeatureRoutesWithLabels_Class> {
+export interface FeatureRoutingModel<Routes_Names extends string> {
     parentRoute: string;
-    featureRoutesWithLabels: T_FeatureRoutesWithLabels_Class;
-    featureRoutes: Route[];
-};
+    routes: {
+        [key in Routes_Names]: RouteInfoModel;
+    };
+}

@@ -1,14 +1,30 @@
-import { Routes } from '@angular/router';
-import { authenticationRoutingModel } from '../../features/authentication/application/routing/authentication-routing';
+import { Route, Routes } from '@angular/router';
+import { authenticationRoutingObject }  from '../../features/authentication/authentication-routing';
+import { RouteInfoModel } from '../../core/models/route-info.model';
+
+
+const generateRoutesFromRoutingModel = (routingModel:  { [key : string]: RouteInfoModel }): Routes => {
+    const routeInfoArray: RouteInfoModel[] = Object.values(routingModel);
+    return routeInfoArray.map(
+        (routeInfo: RouteInfoModel): Route => {
+            return routeInfo.routingObject;
+        }
+    );
+};
 
 export const routes: Routes = [
     {  
-        path: authenticationRoutingModel.parentRoute, 
-        children: authenticationRoutingModel.featureRoutes 
+        path: authenticationRoutingObject.parentRoute, 
+        children: generateRoutesFromRoutingModel(authenticationRoutingObject.routes) 
     },
     { 
         path: '', 
-        redirectTo: `/${authenticationRoutingModel.parentRoute}/${authenticationRoutingModel.featureRoutesWithLabels.login.route}`, 
+        redirectTo: `/${authenticationRoutingObject.parentRoute}/${authenticationRoutingObject.routes.login.routingObject.path}`, 
+        pathMatch: 'full'
+    },
+    { 
+        path: '**', 
+        redirectTo: `/${authenticationRoutingObject.parentRoute}/${authenticationRoutingObject.routes.login.routingObject.path}`, 
         pathMatch: 'full'
     }
 ];
