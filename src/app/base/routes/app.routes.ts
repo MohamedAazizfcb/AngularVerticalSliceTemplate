@@ -18,6 +18,11 @@ export const routes: Routes = [
         children: generateRoutesFromRoutingModel(authenticationRoutingObject.routes) 
     },
     { 
+        path: 'unauthorized', 
+        redirectTo: `/${authenticationRoutingObject.parentRoute}/${authenticationRoutingObject.routes.login.routingObject.path}`, 
+        pathMatch: 'full'
+    },
+    { 
         path: '', 
         redirectTo: `/${authenticationRoutingObject.parentRoute}/${authenticationRoutingObject.routes.login.routingObject.path}`, 
         pathMatch: 'full'
