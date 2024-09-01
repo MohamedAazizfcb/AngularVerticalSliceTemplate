@@ -1,6 +1,7 @@
 import { Route, Routes } from '@angular/router';
 import { authenticationRoutingObject }  from '../../features/authentication/authentication-routing';
 import { RouteInfoModel } from '../../core/models/route-info.model';
+import { NotFoundComponent } from '../../core/components/not-found/not-found.component';
 
 
 const generateRoutesFromRoutingModel = (routingModel:  { [key : string]: RouteInfoModel }): Routes => {
@@ -29,7 +30,7 @@ export const routes: Routes = [
     },
     { 
         path: '**', 
-        redirectTo: `/${authenticationRoutingObject.parentRoute}/${authenticationRoutingObject.routes.login.routingObject.path}`, 
+        component: NotFoundComponent, 
         pathMatch: 'full'
     }
 ];
