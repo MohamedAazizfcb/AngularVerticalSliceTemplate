@@ -12,4 +12,5 @@ export const USER_ROLE_PERMISSIONS: Record<UserRolesEnum, AppPermissionsEnum[]> 
         AppPermissionsEnum.EditProfile
     ],
     [UserRolesEnum.Guest]: [],
+    [UserRolesEnum.Custom]: [],
 };

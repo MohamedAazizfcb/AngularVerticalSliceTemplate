@@ -7,29 +7,33 @@ import { USER_ROLE_PERMISSIONS } from '../constants/user-role-permissions.const'
   providedIn: 'root'
 })
 export class PermissionService {
-  private userPermissions: Set<string> = new Set();
-  private currentUserRole: UserRolesEnum = UserRolesEnum.Guest; // Default to Guest
+  private _currentUserRole: UserRolesEnum = UserRolesEnum.Guest; // Default to Guest
 
   constructor() {}
 
-  // Set user permissions explicitly
-  setPermissions(permissions: AppPermissionsEnum[]): void {
-    this.userPermissions = new Set(permissions);
+  private fillCustomUserRolePermissions = (rolePremissions: AppPermissionsEnum[]): void=>{
+    for(let permission of rolePremissions)
+    {
+      USER_ROLE_PERMISSIONS.Custom.push(permission);
+    }
   }
 
   // Check if the user has a specific permission
-  hasPermission(permission: AppPermissionsEnum): boolean {
-    // Check if the permission is either role-based or explicitly set
-    return USER_ROLE_PERMISSIONS[this.currentUserRole].includes(permission) || this.userPermissions.has(permission);
+  hasPermission = (permission: AppPermissionsEnum): boolean => {
+    return USER_ROLE_PERMISSIONS[this._currentUserRole].includes(permission);
   }
 
   // Set the current user role
-  setUserRole(role: UserRolesEnum): void {
-    this.currentUserRole = role;
+  setUserRole = (role: UserRolesEnum, rolePremissions?: AppPermissionsEnum[]): void => {
+    this._currentUserRole = role;
+    if(this._currentUserRole == UserRolesEnum.Custom)
+    {
+      this.fillCustomUserRolePermissions(rolePremissions??[]);
+    }
   }
 
   // Get the current user role
-  getUserRole(): UserRolesEnum {
-    return this.currentUserRole;
+  getUserRole = (): UserRolesEnum =>{
+    return this._currentUserRole;
   }
 }

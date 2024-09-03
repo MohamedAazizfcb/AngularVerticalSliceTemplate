@@ -15,7 +15,6 @@ import { LoggerService } from '../../../../core/services/logger.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-
   constructor(
     private fb: FormBuilder, 
     private presenter: LoginPresenter,

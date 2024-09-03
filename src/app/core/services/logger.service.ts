@@ -8,18 +8,18 @@ import { LogLevel } from '../../shared/enums/log-level.enum';
 })
 export class LoggerService {
   constructor(
-    private envService: EnvironmentService,
+    private _envService: EnvironmentService,
   ) 
   {}
 
   // General log method
   private log= (level: LogLevel, message: string, ...optionalParams: any[]) => {
-    if(!this.envService.canPerformLogging())
+    if(!this._envService.canPerformLogging())
     {
         return;
     }
 
-    if (!this.envService.isProduction()) 
+    if (!this._envService.isProduction()) 
     {
       console.log(`[${level}] ${message}`, ...optionalParams); // Print to console
     }
@@ -44,7 +44,7 @@ export class LoggerService {
   }
 
   private sendToServer = (level: LogLevel, message: string, optionalParams: any[]) => {
-    if (this.envService.isProduction()) {
+    if (this._envService.isProduction()) {
       // Post Request
     }
   }

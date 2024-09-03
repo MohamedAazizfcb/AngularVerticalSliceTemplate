@@ -7,7 +7,7 @@ import { RouteInfoModel } from '../models/route-info.model';
 })
 export class RoutesService {
     constructor(
-        private router: Router
+        private _router: Router
     )
     {}
 
@@ -20,6 +20,6 @@ export class RoutesService {
     }
 
     navigateToRoute = (routeInfo: RouteInfoModel): void => {
-        this.router.navigate(this.getNavigationRoute(routeInfo));
+        this._router.navigate(this.getNavigationRoute(routeInfo));
     }
 }

@@ -6,16 +6,19 @@ import { TokenService } from '../services/token.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private tokenService: TokenService, private router: Router) {}
+  constructor(
+    private _tokenService: TokenService, 
+    private _router: Router
+  ) {}
 
-  canActivate(): boolean {
-    if (this.tokenService.isTokenValid()) // if there is a token Go on and the interceptor will kick you out if the token is expired
+  canActivate = (): boolean => {
+    if (this._tokenService.isTokenValid()) // if there is a token Go on and the interceptor will kick you out if the token is expired
     {
       return true;
     } 
     else 
     {
-      this.router.navigate(['/login']);
+      this._router.navigate(['/login']);
       return false;
     }
   }

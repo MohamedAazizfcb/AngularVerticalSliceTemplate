@@ -3,24 +3,23 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { PermissionService } from '../services/permission.service';
 import { UserRolesEnum } from '../enums/user-role.enum';
 import { AppPermissionsEnum } from '../enums/app-permissions.enum';
+import { unauthorizedRoutePath } from '../../base/routes/app.routes';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(private permissionsService: PermissionService, private router: Router) {}
+export class PermissionGuard implements CanActivate {
+  constructor(
+    private _permissionsService: PermissionService, 
+    private _router: Router
+  ) {}
+
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const requiredRole = route.data['role'] as UserRolesEnum;
     const requiredPermission = route.data['permission'] as AppPermissionsEnum;
-
-    if (requiredRole && this.permissionsService.getUserRole() !== requiredRole) {
-      this.router.navigate(['/unauthorized']); // Navigate to unauthorized page
-      return false;
-    }
-
-    if (requiredPermission && !this.permissionsService.hasPermission(requiredPermission)) {
-      this.router.navigate(['/unauthorized']); // Navigate to unauthorized page
+    
+    if (requiredPermission && !this._permissionsService.hasPermission(requiredPermission)) {
+      this._router.navigate(['/', unauthorizedRoutePath]); // Navigate to unauthorized page
       return false;
     }
 

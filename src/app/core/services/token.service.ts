@@ -4,18 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TokenService {
-  private accessTokenKey = 'accessToken';
+  private _accessTokenKey = 'accessToken';
 
   saveAccessToken = (token: string): void => {
-    localStorage.setItem(this.accessTokenKey, token);
+    localStorage.setItem(this._accessTokenKey, token);
   }
 
   getAccessToken = (): string | null => {
-    return localStorage.getItem(this.accessTokenKey);
+    return localStorage.getItem(this._accessTokenKey);
   }
 
   clearAccessToken = (): void => {
-    localStorage.removeItem(this.accessTokenKey);
+    localStorage.removeItem(this._accessTokenKey);
   }
 
   isTokenValid = (): boolean => {
