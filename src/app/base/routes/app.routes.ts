@@ -31,7 +31,7 @@ export const routes: Routes = [
     },
     { 
         path: '', 
-        redirectTo: `/`, 
+        redirectTo: unauthorizedRoutePath, 
         pathMatch: 'full'
     },
     { 
