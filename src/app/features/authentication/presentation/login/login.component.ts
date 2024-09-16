@@ -4,13 +4,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { LoginPresenter } from './login.presenter';
 import { CommonModule } from '@angular/common';
 import { LoggerService } from '../../../../core/services/logger.service';
-
+import { IconComponent } from "../../../../shared/components/icon/icon.component";
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, IconComponent],
   providers: [LoginPresenter],
 })
 export class LoginComponent {
