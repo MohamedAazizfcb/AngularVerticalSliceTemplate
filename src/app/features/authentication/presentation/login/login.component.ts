@@ -5,6 +5,7 @@ import { LoginPresenter } from './login.presenter';
 import { CommonModule } from '@angular/common';
 import { LoggerService } from '../../../../core/services/logger.service';
 import { IconComponent } from "../../../../shared/components/icon/icon.component";
+import { ToastrService } from '../../../../shared/features/toastr/services/toastr.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -19,6 +20,7 @@ export class LoginComponent {
     private fb: FormBuilder, 
     private presenter: LoginPresenter,
     private logService: LoggerService,
+    private toastrService: ToastrService,
   ) 
   {
     this.loginForm = this.fb.group({
@@ -28,6 +30,8 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.toastrService.success("DDDDDDDDDDDDDDDDDDDDDDDDDDDDdddd");
+
     if (this.loginForm.valid) {
       this.logService.info(`user ${this.loginForm.value.username} is trying to login`);
       this.presenter.login(this.loginForm.value.username, this.loginForm.value.password)
