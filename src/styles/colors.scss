@@ -1,0 +1,31 @@
+// Base Colors
+$primary-color: #30E3CA; // Vibrant Coral for buttons, accents
+$secondary-color: #11999E; // Soft Indigo for navigation, headings
+$tertiary-color: #E4F9F5; // Bright Yellow for highlights, call-to-action
+$sds: #40514E;
+
+// Grayscale
+$black-color: #2E2E2E; // Dark text, borders
+$dark-gray: #5A5A5A; // Dark backgrounds, secondary text
+$medium-gray: #9A9A9A; // Icons, placeholders
+$light-gray: #F2F2F2; // Background, input fields
+$white-color: #FFFFFF; // Text, cards, main background
+
+// Gradient
+$gradient-primary: linear-gradient(135deg, $primary-color, $secondary-color);
+$gradient-accent: linear-gradient(135deg, $tertiary-color, $primary-color);
+
+// Background Colors
+$background-light: #F9FAFC; // Light background
+$background-dark: #1A1A1D; // Dark mode background
+$card-background: #FFFFFF; // White background for cards
+
+// Typography Colors
+$heading-color: $black-color;
+$text-color: $dark-gray;
+$muted-text: $medium-gray;
+
+// Box Shadows
+$box-shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+$box-shadow-medium: 0 8px 15px rgba(0, 0, 0, 0.15);
+$box-shadow-dark: 0 12px 24px rgba(0, 0, 0, 0.2);

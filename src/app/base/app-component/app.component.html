@@ -1,2 +1,7 @@
-<app-toastr></app-toastr>
-<router-outlet></router-outlet>
+@if (isLoading) {
+    <app-splash-screen></app-splash-screen>
+}
+@else {
+    <app-toastr></app-toastr>
+    <router-outlet></router-outlet>
+}
