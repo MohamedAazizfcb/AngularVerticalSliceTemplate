@@ -1,47 +1,94 @@
 .splash-screen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #ffffff; /* White background or custom color */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px; /* Add padding for smaller screens */
+}
+
+.fullscreen-overlay {
+  position: fixed; /* Fixes the element to the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  z-index: 9999; /* Ensures it's on top of everything */
+  overflow: hidden; /* Disable scrolling */
+  background-color: white;
+}
+
+body {
+  overflow: hidden; /* Disable scrolling on the page */
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 100%;
+  max-width: 400px;
+  animation: bounce 1.5s infinite; /* Optional animation */
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  .logo-container {
-    margin-bottom: 20px;
+  50% {
+    transform: translateY(-15px);
   }
-  
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db; /* Custom color */
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #555555;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .logo {
-    width: 150px;
-    animation: bounce 1.5s infinite; /* Optional animation */
+    max-width: 300px; /* Reduce logo size on tablets */
   }
-  
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-15px);
-    }
-  }
-  
+
   .loader {
-    width: 50px;
-    height: 50px;
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #3498db; /* Custom color */
-    border-radius: 50%;
-    animation: spin 2s linear infinite;
+    width: 30px;
+    height: 30px;
   }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
+
   .loading-text {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #555555;
+    font-size: 14px;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-width: 200px; /* Reduce logo size on mobile */
+  }
+
+  .loader {
+    width: 25px;
+    height: 25px;
+  }
+
+  .loading-text {
+    font-size: 12px;
+  }
+}

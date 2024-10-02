@@ -11,11 +11,5 @@ import { SplashScreenComponent } from '../../shared/components/splash-screen/spl
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  isLoading = true;
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.isLoading = false; // Hide splash screen after initialization
-    }, 3000); // Adjust the timeout as needed or base it on async operations
-  }
 }
